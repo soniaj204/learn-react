@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 
 import Person from "./Person/Person";
+import UserOutput from "./UserOutput/UserOutput";
+import UserInput from "./UserInput/UserInput";
 
 class App extends Component {
   state = {
@@ -19,7 +21,16 @@ class App extends Component {
         age: 3
       }
     ],
-    other: "other value"
+    other: "other value",
+
+    nameP: [
+      {
+        name: "SSJJ1"
+      },
+      {
+        name: "SSJJ2"
+      }
+    ]
   };
 
   switchNameHandler = (newName) => {
@@ -60,6 +71,19 @@ class App extends Component {
     });
   };
 
+  namePChangedHandler = (event) => {
+    this.setState({
+      nameP: [
+        {
+          name: event.target.value
+        },
+        {
+          name: "SSJJ2"
+        }
+      ]
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -84,6 +108,9 @@ class App extends Component {
           name={this.state.persons[2].name}
           age={this.state.persons[2].age}
         />
+        <UserOutput name={this.state.nameP[0].name} />
+        <UserOutput name={this.state.nameP[1].name} />
+        <UserInput name={this.state.nameP[0].name} changed={this.namePChangedHandler}/>
       </div>
     );
   }
